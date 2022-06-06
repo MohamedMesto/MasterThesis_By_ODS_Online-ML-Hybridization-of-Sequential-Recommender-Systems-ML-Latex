@@ -1,0 +1,61 @@
+% \documentclass{scrbook}
+
+% \documentclass[12pt]{article}
+
+\documentclass[12pt]{report}
+
+
+% packages
+\usepackage[dvipsnames]{xcolor}
+\definecolor{DarkRed}{rgb}{0.71,0.12,0.07}
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{booktabs} 
+\usepackage{epsfig}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{float}
+\pagestyle{empty}
+\usepackage[export]{adjustbox}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{array, makecell}
+\usepackage{color}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage[justification=centering]{caption}
+\usepackage{subcaption}
+
+% framing
+\setlength{\textheight}{8.5in} \setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.0in} \setlength{\headsep}{0.0in}
+\setlength{\leftmargin}{0.5in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+
+\setlength{\textheight}{8.5in} \setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.0in} \setlength{\headsep}{0.0in}
+\setlength{\leftmargin}{0.5in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+
+% math
+\newtheorem{definition}{Definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+% bib
+\usepackage[style=numeric, sorting=none]{biblatex}
+\renewbibmacro{in:}{}
+\addbibresource{msc/bibliography.bib}

@@ -1,0 +1,34 @@
+\chapter{Future Work}
+\label{chapter:future_work}
+In this chapter, we want to propose and briefly explain potential future work to improve our system. We believe that some intriguing areas for further study exist. 
+
+\section{BERT}
+
+BERT is undoubtedly a breakthrough in the use of Machine Learning for Natural Language Processing because it’s approachable and allows fast fine-tuning. BERT per window would deliver effective representation, but we don't integrate BERT into the whole system: that’s too much work and the result would be too random–lots of configuration to make it function. 
+
+However, in the long run, BERT is definitely worth implementing in our system:
+
+\begin{itemize}
+    \item At ground Level, BERT can be used to encode IPs as bit sequence better than the RNNs we currently use: as opposed to directional models, which read the input sequentially, the BERT Transformer encoder reads the entire sequence at once. Therefore, it is considered bidirectional or non-directional. This characteristic allows the model to learn the context of a bit based on all of its surroundings. 
+    
+    \item At the high Level, BERT can be used to encode episodes of entire windows (i.e., coherent sequences of windows).
+
+\end{itemize}
+
+
+\section{Markov chain}
+What we focus so far are the most important items, that is, our model has been good at identifying top hits. To expand practical use of our system in the future, we would like to model a query load, then we can try to track not simply the items showing up the most frequently in the trace but the items showing quite frequently in the trace thus quite likely to be queried next. Markov chains model is extremely effective in fulfilling this goal.
+
+A Markov chain essentially consists of a set of transitions, which are determined by some probability distribution, that satisfy the Markov property. Even though some item in the sequence may not be at the tip of the top, we can still estimate it with high accuracy or high probability using Markov chain so that it can be queried more likely than some other items.
+
+Indeed, to restrict the representation space efficiently, user query tracking is a logical complement. Since we are very interested in the ability of latent to represent the data in a more diffused manner, we plan on experimenting with queries where the importance metric is not directly something as simple and explicit as their frequencies but a combination of their frequencies and their likelihood to be queried, that is, a Markov chain (as in IDEBench~\cite{eichmann2020idebench}, for example).
+
+% \section{Experimenting With  Datasets}
+
+
+% paraphrased from Timo
+\section{Manual Control Over the System}
+
+Although our hybrid system is very adaptable and tuned for hybridization, it remains a somewhat black box technology. Hand fine-tuning of hyperparameters can occasionally give superior outcomes to automatic optimization. As a result, providing the user with increased control over the system becomes logical. Changing hyperparameters programmatically using code is simple. Unfortunately, the barriers for people unfamiliar with the programming are substantial.
+In an ideal case, we would create a user interface that would allow the user to manage the level of hybridization. 
+
