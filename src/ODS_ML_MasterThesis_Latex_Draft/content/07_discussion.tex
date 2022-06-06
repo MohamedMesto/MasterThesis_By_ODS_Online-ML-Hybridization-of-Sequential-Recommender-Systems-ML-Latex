@@ -1,0 +1,40 @@
+\chapter{Discussion}
+\label{chapter:discussion}
+
+This chapter will cover the constraints of our existing model and some possible enhancements. 
+
+\section{Shortcoming of Data}
+% dataset too small
+\paragraph{Limited dataset}
+Our system is executed based on traffic data collected by CAIDA. Instead of taking up all data files from the designated folder, we only pick one file (NumPy format data) and preprocess it into time data. In addition, we mostly train and test our model from window 1 - 20 rather than all windows extracted. Therefore, our experiment data could be insufficient to make future predictions, which may lead to inaccurate results. It could cause overfitting: the training model reads the data too much for too little data (this means the training model actually memorizes the patterns). As a result, it has low training errors but may not work well in the real world. Our batch size setting is also restricted because of the limited data we have -- batch size has to be a factor of 1000 (per window size) to make training smooth.
+
+% not consider port, protocol etc
+\paragraph{Incomplete feature extraction}
+In fact, each flow in the traffic data contains not only source and destination IP address, but also port number and protocols. We try to simplify the design by only considering IP addresses as feature vectors, since IP plays major roles in network traffic. This trimming of features could possibly lead to over-simplified or even distorted neural network, that is, we don't have designs for trimmed features hence miss some useful patterns from the data.
+
+% data already in decreasing order
+\paragraph{Ordered data}
+The data we utilized is already in descending order by counts. This is probably problematic because some layers could have insanely easy time for training. Consequently, the performance of our system will possibly go worse when testing in a
+real-world environment where items are not ordered or preprocessed.
+
+
+\section{Lack of Diversity}
+
+% sketch parameter not optimized
+\paragraph{Parameters of count-min}
+As a frequency estimation method, count-min has some parameters to determine, including number of hash function, space and number of buckets. Since our system focuses more on the deep learning model, we choose the value for those parameters roughly without thorough comparisons. So, our system can be further improved by properly adjusting values of those parameters.
+
+% not compare count sketch
+\paragraph{Monotonous count-min}
+Similar as choice of parameters values, we only consider count-min as our sole frequency estimation algorithms. But count-min is not the only one that would work -- Count-Median and Count-Sketch are also effective frequency estimation techniques using hashing-based algorithms. These other methods could produce the same or even superior results after discreet comparison and selections. 
+
+\section{Excessive manual controls and manipulations inside TF Ecosystem}
+
+Our primal neural network consists of RNN layers, Reshaping Layers, Concatenation Layers, Dense Layers and Activations Layers etc. These layers are typical TensorFlow model built-ins. That is to say, they follow general regulations in TensorFlow Ecosystem. For example, these layers update parameters automatically when training and backpropagating, thus no more manipulations or control needed.
+
+However, when we are constructing the top k pyramid version of the model, we add some manual force. Because we want to pool from batch size of elements to a smaller amount of elements, we change the size of the first dimension inside the network compared with the initial input tensors. But in usual TF network, the first dimension, also known as batch size, should keep constant during model processing. 
+
+Moreover, since we want to get the indices of the top k elements, we sort the tensor sequence which means we change the order each input item occurs in the network, for example, tf.math.top\_k -- this does not match native TensorFlow style. We also assign and overwrite items in the batch sequence by using tf.tensor\_scatter\_nd\_update. 
+
+The above-mentioned operations can cause much more expensive computations, lost gradients for certain layers and incoordination with the stateless concept of TF. The reason is because, instead of using only native TensorFlow ecosystem, we impose too many manual controls and manipulations over the model.
+
