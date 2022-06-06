@@ -1,14 +1,14 @@
 <table border=0>
 <tr border=0>
 <td> <img align="left"  alt="Mohamed Mesto" width="100px" height='60px' src="https://www.ods.tu-berlin.de/fileadmin/Aperto_design/img/logo_01.gif"/> </td>
-  <td> </td>
+  <td> <h5> Institut für Telekommunikationssysteme Verteilte offene Systeme (ODS).</h5> </td>
   <td>  <img align="right"  alt="Mohamed Mesto" width="160px" height='60px' src="https://www.ods.tu-berlin.de/fileadmin/fg311/pics/logos/Logos/ODS_final_20150821_Web_transparent.png"/></td>
 </tr>
 <tr border=0>
 <td> </td><td> <h5> MasterThesis By ODS Efficient optimization of latent driven sketches</h5> </td><td> </td>
 </tr>
 <tr border=0>
-<td> </td><td> <h5>by Institut für Telekommunikationssysteme Verteilte offene Systeme (ODS).</h5> </td><td> </td>
+<td> </td><td> </td><td> </td>
 </tr>
 
   <tr>
