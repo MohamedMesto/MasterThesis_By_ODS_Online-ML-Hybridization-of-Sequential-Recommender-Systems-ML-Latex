@@ -3,6 +3,8 @@
   <tr border=0>
     <td border=0>
 <h5> MasterThesis By ODS Efficient optimization of latent driven sketches</h5>
+  </tr>
+      <tr border=0>
        <br/>
 <br/>
       <h2 font-color='red'>Skills : </h2>
@@ -26,7 +28,7 @@ Supervisor <a href='https://www.linkedin.com/in/damien-foucard-0b50317a/'> Ph.D.
     </tr>  
     </table>
 
-<table>
+
 
 ## Contributors
 - Mohamed Mesto m.mesto@campus.tu-berlin.de  , Mohamedmesto111@gmail.com
