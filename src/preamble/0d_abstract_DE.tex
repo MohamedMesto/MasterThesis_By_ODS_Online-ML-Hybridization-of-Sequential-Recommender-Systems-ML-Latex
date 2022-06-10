@@ -1,0 +1,16 @@
+\begin{center}
+    \subsection*{Zusammenfassung}
+\end{center}
+\thispagestyle{empty}
+Empfehlungssysteme spielen eine zentrale Rolle in unserer Gesellschaft. Um bessere Empfehlungen geben zu können, müssen bestehende Systeme erweitert werden und neue entwickelt werden.
+
+Bestehende sequentielle Empfehlungssysteme sind meist zeitunabhängig. Es fehlt ein Mechanismus zur Erfassung zeitlicher Muster, der Zeitstempel kodieren kann. Häufig ist ein umfangreiches Vortraining erforderlich, und die Modelle können sich nicht in Echtzeit an die Daten anpassen, wie dies in einer Online-Umgebung der Fall ist. Die Meta-Optimierungslogik von Hyperparametern führt häufig zu einer unzureichenden Ressourcenzuweisung, und es fehlt ein Kontrollmechanismus für Administratoren.
+
+Wir entwerfen ein hybrides, sequentielles online Empfehlungssystem, basierend auf BERT und Markov Ketten. Für unsere Hybridisierungsarchitektur verwenden wir Regression,
+mit der die beiden Modelle durch Aggregation und Optimierung der Outputs zusammengeführt werden. Das System kombiniert die Modelle automatisch durch Optimierung von Meta-Parametern. Es ist hochflexibel und kann leicht neue Datensätze mit unterschiedlichen Datentypen integrieren. Wir erweitern das BERT Model um Zeitstempel zu integrieren, die zeitliche Muster aus Daten extrahieren können. Darüber hinaus entwerfen wir eine Recheneinheit für unser Markov-Ketten-Modell zur effizienten Parallelisierung und entwickeln umfangreiche Mechanismen zur Erfassung von Konzeptdrift. Unsere Lösung ist bereit für eine Online-Umgebung und unterstützt das Training in Echtzeit. Bei Bedarf fügt das System dynamisch Modelle hinzu oder entfernt sie. Es überwacht jedes Modell einzeln und setzt ein Modell zurück oder trainiert es neu, sobald die Genauigkeit der Vorhersagen abnimmt. 
+
+Die Durchführung mehrerer Experimente zeigt, dass unser hybrides System deutlich genauere Vorhersagen machen kann als bestehende Modelle. Für den MovieLens 1M-Datensatz haben wir eine Steigerung der Hitrate@1 um  5,26\% und eine Verbesserung der Mean Average Precision um 5,95\%. Für den Amazon Beauty-Datensatz erreichen wir eine Steigerung der Hitrate@1 um 5,85\% und eine Verbesserung der Mean Average Precision um 4,31\%. Unsere Ergebnisse unterstreichen die Bedeutung von Hybridisierungsmethoden und ihr Potenzial für Leistungsverbesserungen.
+\thispagestyle{empty}
+
+
+

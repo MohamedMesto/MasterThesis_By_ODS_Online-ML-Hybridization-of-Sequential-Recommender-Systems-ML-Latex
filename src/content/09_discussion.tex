@@ -1,0 +1,17 @@
+\chapter{Discussion}
+
+\section{Reproducibility}
+ACM is an annual conference series on recommender systems. At this conference, authors can present their papers about recommender systems, and the best papers get awarded. Notably, in 2019 a paper called "Are we really making much progress? A worrying analysis of recent neural recommender approaches" won the award~\cite{dacrema2019we,dacrema2021troubling}. In their work, the authors reviewed 18 different algorithms for recommender systems that were considered state-of-the-art and were presented by researchers at renowned conferences. It turned out that they were only able to implement 7 of them with reasonable effort. 
+They measured the performance of the 7 algorithms and found that 6 of them performed poorly. With simple heuristic techniques, they were able to outperform what were considered state-of-the-art algorithms. Only one of the algorithms performed better than the simple heuristic techniques. The results highlight the shortcomings in academics and the need for better scientific practices. Another problem is that seeding all the randomness in all processes is difficult these days as every function is often stacked on top of other functionalities. As such, the processes become very complex, which can hurt reproducibility.
+
+We have tried to the best of our abilities to make the results of our hybrid model comparable by following standard practices for evaluation and datasets used by other popular papers. Throughout the development, we focused on reproducibility. E.g., we verified our results by running our experiments on different hardware or by letting other students run our experiments independently.
+
+
+\section{Real-World Applications}
+We tried to make our results comparable to other state-of-the-art models. Although we have trained and experimented with popular datasets, we have not tested our system in a real-world environment. Our hybridization approach is trained to adapt to changes in the data. However, changes in the environment, are often overlooked. A common factor that affects training and predictions is the workload: user access to online applications can vary greatly, and the workload during peak hours needs to be considered. Similarly, we need to prepare our system for anomalies.
+
+% D.
+% "Similarly, we need to prepare our system for anomalies."
+% sounds like future work more than discussion… but the two really easily get confusingly blended together
+% 
+% 

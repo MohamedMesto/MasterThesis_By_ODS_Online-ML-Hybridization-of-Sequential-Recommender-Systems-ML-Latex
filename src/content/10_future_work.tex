@@ -1,0 +1,59 @@
+\chapter{Future Work}
+In this chapter, we want to present potential future work to improve our system. The field of sequential recommender systems is vast, and although we have designed our system based on the current state-of-the-art technologies, there is further room for improvement.
+
+\section{Exploring Different Ensemble Methods}
+We have built our hybrid system with an ensemble method called stacking. The decision to use stacking came after evaluating several different ensemble methods. Stacking is not only very popular, but it is also reasonably easy to implement. It allows us to hybridize several models by fusing the output layers. 
+
+Another popular ensemble method is boosting. Rather than fusing the output layer, models are combined sequentially. The output of each model gets passed on to the next model. That way, each model tries to correct the predictions of the previous model. Although we have successfully implemented such a boosting hybrid system with our models, it failed to outperform the state-of-the-art reference models. However, there are more variations of ensemble methods we have not tried yet. Such as training each model with different subsamples of the dataset, an ensemble method called Bagging. We expect that a deeper exploration of ensemble methods could yield more accurate prediction results.
+
+\section{Integration with Internal Work}
+Several students are working on either their bachelor's or master's thesis at the chair of open distributed systems. The topics are closely related. Students are exploring different machine learning algorithms and classic techniques for sets, trees, and graphs. The goal is to integrate all of the systems into a massive machine learning framework. For example, one of the students works on a test bench to evaluate machine learning models. Integration with our work would allow for a more comprehensive evaluation and a better comparison to other models. 
+
+% D.
+% true, maybe a bit crass to mention it like this, though.
+% Masked it a bit as "Integration with Internal Work"
+% I don't want mentions of our internals to take away too much from how scientific we are
+%
+% It's just that I know that people in papers don't usually speak so much about the integration with other tools... because academic work is typically totally "do once, throw away", just some shaky proof of concept with zero extensibility, and not like us a major cohesive piece. So, I just don't know from my experience how to present extensibility and integration with other components.
+% 
+% Should be totally fine now, though.
+% 
+
+% D.
+% _Interactive pruning/crawling_
+% crawling more from unified?
+% interactively crawling; = reinforcement learning
+% [Meeting Notes – 10.12.2021](https://adastruct.slack.com/archives/C026G65797F/p1639231624059100), _Interacting with the Environment – Tree as a Reinforcement Learning Model_
+
+
+
+
+\section{Adding Complementary Models}
+For our work, we have hybridized a state-of-the-art machine learning model with a classic model: BERT with Markov chains. However, the literature presents many different state-of-the-art models with comparable prediction results. Hybrid systems that score best on popular benchmarks often hybridize lots of different models. For example, the system that won the Netflix Prize is a hybrid of 107 models~\cite{Netflixprize}. Therefore it makes sense to integrate more state-of-the-art models into our hybrid system and compare the results. Fortunately, we have built our system so that it is easy to add more models to it.
+% D.
+% I can imagine that we would even fetch the right models in some crawling for models alongside crawling for data
+% general unified crawling. Process = data.
+% = planned internal work
+
+\section{Experimenting With More Datasets}
+For the evaluation of our hybrid recommender system, we have used popular datasets. Since other papers use the same datasets, we can easily compare our results. However, we plan to train our hybrid system with more datasets in the future. In particular, some students that work for companies in their free time have proprietary datasets that we want to use to help them with recommendations. Other students are working on crawlers to scrape new datasets dynamically that we plan to utilize.
+% D.
+% not just experimenting with more datasets but experimenting in more real contexts. So, really, presenting the work to a broader set of benchmarks–like IDEBench, making use of the system in a larger set of utilization
+% and https://github.com/AdaStruct/focus/blob/main/demos/demo.gif belongs to the same story
+
+
+\section{Refined User Control}
+Although our hybrid system is highly flexible and is optimized to hybridize our models for best performance, it is still a relatively black box system. Manual fine-tuning may sometimes produce better results than automated optimization of hyperparameters. Therefore it makes sense to give the user more control over the system. It is easy to change hyperparameters programmatically through the code. However, the hurdles are high for users not familiar with the code. Ideally, we would like to build a user interface that gives the user control over various degrees of hybridization.
+
+
+% D.
+% update localization
+% only changing model around the change. Can give much more efficiency
+% =
+% - [Ali's thesis](https://www.overleaf.com/8344845978dschrbhntvsk)
+% - whole [focused inference](https://app.slack.com/messages/-focused_inference/)
+% - gradient-driven structure updating
+%   [_Gradient-driven Restructuring (flat)_](https://adastruct.slack.com/archives/C02LU990FJM/p1638973794006000?thread_ts=1638811493.000200&cid=C02LU990FJM)
+% - evolutionary structure updating
+%   [_Evolutionary Restructuring_](https://adastruct.slack.com/archives/C02LU990FJM/p1638811500000300?thread_ts=1638811493.000200&cid=C02LU990FJM)
+% 

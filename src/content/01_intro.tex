@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%
+%%% I - first part %%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}\label{ch:introduction}
+
+\section{Motivation}
+% general motivation
+With the ever-growing amount of data on the Internet, it has become increasingly difficult to deal with information overload. A recommender system finds patterns in data and tries to analyze the behavior and preferences of users to recommend information that appears most relevant to a particular user and filter out unrelated noise~\cite{isinkaye2015recommendation}. Over the years, recommender systems have evolved to accommodate a wide range of problems.
+
+% why recommender systems - specifically as an example in e-commerce
+\paragraph{Need to Filter Choices: Recommendations}
+In the context of e-commerce, advertising plays a crucial role. When consumers face too many choices, they experience anxiety~\cite{schwartz2004doing}. Recommender systems target consumers with advertising to reduce the available options and recommend products. By making effective recommendations, the advertiser can increase the number of sales.
+Products otherwise found only by extensive searches are made readily available to the consumer~\cite{rohde2018recogym}. Recommender systems are present in all areas of the Internet. When one performs a Google search, Google's PageRank algorithm recommends the best matching websites to our search query. Behind the scenes, search engine optimization (SEO) is a research area focused on increasing the ranking for specific websites to appear higher in the search results, which in turn generates more traffic. And most social media platforms feature a dedicated page for users to explore recommended and related content, which can be in the form of videos, images, or users to follow.
+
+\paragraph{Too much Noise and too few Patterns}
+The massive amount of data that is out there contains a large number of patterns that a system can extract. Yet, one of the main challenges nowadays is not so much to capture patterns in large amounts of data: the difficulty lies in capturing patterns in small portions of data. Taking the example of a social media network such as Reddit, the system should then make recommendations to a new user who has only visited one post.
+
+% need to decide what to look at
+Modern architectures are undoubtedly challenging: on the one hand, the information passed can be minimal, and on the other hand, the information to learn from is often of vast proportions. Hence, the recommendation problem at its core is a problem of attention. Based on the available information, the system needs to decide where to put the focus. The system also needs to determine, how many resources to allocate to inspect the subspace.
+
+
+\section{Requirements}
+
+% distracted by mass
+Although the information, in general, is abundant, the relevant information is often scarce and very much obscured by the irrelevant mass. Faced with this scarcity, it appears natural when trying to optimize recommendations to try to augment the information available by all means. Taking into account sequences of data points instead of just isolated items, in the form of sequential embeddings~\cite{Githubbert4rec, tang2018personalized, rendlefactorizing} has been a recent important step in that direction, out of many.
+
+\paragraph{Need to include Temporal Patterns}
+%
+Fortunately, there are still plenty more patterns in the data one can draw more information from. The temporal order of data holds valuable information. When patterns change, the system ought to adapt. It should keep up with current patterns and predict upcoming patterns in the near and further future to allow for effective optimization ahead of time. For example, a user's behavior evolves continually due to changes in mood (short term) or changes in taste (long term). The system should identify and process the change and adapt to it: forget old patterns and effectively learn new patterns~\cite{tsymbal2004problem}. The same can happen for a larger group of users with data that exhibits spatio-temporal patterns. 
+
+Existing work in recommendations only captures the sequential patterns in a time-agnostic fashion: $ A $, $ B $, $ C $ instead of $ A(t=0s $), $ B(t=10s) $, $ C(t=50s) $, for example. A mechanism to bring together timestamp values and sequential patterns thus appear necessary~\cite{wang2019survey, wang2019sequential}.
+
+\paragraph{Need for Integration in a Heterogeneous Environment}
+%
+Another important aspect is that data is not isolated but is part of a highly heterogeneous ecosystem: users query the system, administrators want to change and control the system. Then there is new data constantly added to the system. The ecosystem that makes up the data is highly unstructured. Such a large variety of events calls for a differentiated and flexible mechanism to model sequential patterns in a hybrid environment. Rather than a simple interface with user sequences fed in without consideration for the types of the events, as is predominant in the literature~\cite{sun2019bert4rec}, we need a solution that can smoothly integrate the different forms of events.
+
+There is a need to extend the mechanism that captures the sequences to broaden the spectrum of observations. Multiple forms of capture need to be combined. 
+
+
+\paragraph{Need for Explainability through Flexibility}
+%
+A considerable challenge is to build a system that is both reliable and explainable to users. Only then can humans be brought on board, and their valuable input fits into the model. Collaboration between humans and machines is necessary for the system to capture the semantics of the data in-depth---only then can AI's full potential come to fruition.
+
+Existing work is by and far agnostic to the massive diversity of relationships between objects. The state of the art does not capture the relationship among different categories of data~\cite{sun2019bert4rec}. But, further, the relations are often opaque black boxes without any control mechanism. A hybrid approach that offers controls and makes use of various mechanisms is needed. Not only are diverse relationships poorly captured in a differentiated manner but they are also not presented to humans in an understandable manner: the mechanisms are opaque black boxes without any clear lever. A hybrid approach that offers controls rooted in the diversity of the environment is needed.
+% A hybrid approach that offers controls rooted in the diversity of the environment is needed.
+% to be defined what means
+
+To get the full expressivity of data and integrate its diversity organically, capturing relevant substructures is paramount and there, given the combinatorial number of entities involved, effective summarization becomes a necessity: mechanisms are needed to continuously decide which substructures should receive which representation and how many resources to allocate. Over time one should review the decisions: merging, shrinking, and extending substructures as necessary. Existing work is still far from such organic, highly adaptive and highly dynamic structures, as the data is typically only represented with flat (vs. hierarchical and organic), undifferentiated~\cite{sun2019bert4rec} (vs. summarized) structures.
+
+% effective summarization = final embedding from classic, off general classic embeddings
+% general classic embeddings possibly completed by ML embeddings
+
+
+\section{Problem Statement}
+State-of-the-art models lack a comprehensive, time-aware solution that flexibly captures data patterns. There is a need for a tractable plurality of forms of capture and associated controls and the data representation ought to be organic and capture the relevant patterns.
+%
+Considering these gaps, we offer to address the following problem in this work:
+
+\emph{
+How to capture data in a fully temporally aware manner and with organic controls?}
+
+
+\section{Solution}
+%
+We propose a comprehensive solution that captures the temporal evolution of sequential dependencies in the data. A novel hybridization mechanism combines two state-of-the-art machine learning models as well as a novel solution with organic control.
+%
+Via an automated learning mechanism, the system learns to adapt parameters to changing patterns in the data, within a frame defined by a human---hence balancing resources spent in human control vs. in machine exploration.
+
+\subsection{Online Inference}
+Our workload consists of a sequence of queries from a variety of users. Queries are parsed and batched. Our system then issues recommendations on the batch.
+
+\subsection{Integration of Control to Trade-off Model-Based/ML}
+The system combines model-based Markov-chain-driven approaches and an ML-driven inference solution based on BERT as a basis to build embeddings from, with a combination logic on top.
+
+Our hyperparameter optimization logic optimizes the parameters but within the frame set by the user, hence trading off control from user vs. resources spent on learning. To save space, ensure an understandable control and improve our performance, the items are summarized into substructures.
+
+\section{Contributions}
+
+Our contributions are as follows:
+
+% more selling
+
+\begin{enumerate}
+    \item \emph{Better Recommendations}
+    Accuracy is arguably the most important and often the only metric with which one evaluates recommender systems. Researchers are constantly working to develop, enhance and combine models to make more accurate predictions. In the yearly RecSys contest, participants compete to build the most accurate recommender system~\cite{recsyschallenge}.
+    %
+    We believe that our hybrid system design will yield more accurate predictions than the existing state-of-the-art models.
+
+
+    \item \emph{Online Capture}. We deliver a system with an extensive array of mechanisms for capturing concept drift: we batch windows and keep learning in an unsupervised and light manner at test time (continual learning).
+    %
+    We believe that this extensively expressive approach to concept drift would inspire future work.
+
+
+    \item \emph{Organic Summarization} We automatically manage the resources dedicated to our structures, namely the size of their embeddings as well as which structures we create. Attention is initiated based on the workload, starting with regions with more queries and exploring away.
+    %
+    We believe that this organic summarization in the representation would inspire future work.
+    
+    
+    \item \emph{Flexibility}.
+    Although we subsume two different state-of-the-art models, we aim to make our system flexible and modular. There are countless other recommender models that we can not all cover in this work. Hence we will build our system in such a way that it becomes easy to add new models.
+    
+    
+    \item \emph{Differentiated Combined Pipeline} We develop a framework using state-of-the-art model-based algorithms. Our system will offer a mechanism with a differentiated degree of control. The framework is highly flexible and allows the native integration of new input, new state modeling, and new output with associated control. We automate the combination via a meta-parameter optimization that uses only as many resources as allowed by the user. The user controls the framework and sets parameters to optimize. If the frame is narrow, the exploration work becomes smaller. Hence there is a natural trade-off between control of the machine and human control.
+
+\end{enumerate}

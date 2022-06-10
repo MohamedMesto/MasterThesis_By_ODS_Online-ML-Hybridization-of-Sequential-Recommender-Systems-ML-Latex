@@ -1,0 +1,190 @@
+
+% \chapter{Introduction}
+
+%%%%%%%%%%%%%%%%%%%
+%%%% Attempt 2 %%%%
+%%%%%%%%%%%%%%%%%%%
+%
+% % ok.
+% % Language a bit over the top at times but the structure really does the work of showing where I want to go each time.
+% % also, a bit of overselling but things still pretty much without our envelope, especially given we can leverage internal work.
+%
+%
+%
+% %%%%%% Framing %%%%%%
+% There is too much data and effective recommendations, redirecting an observer to whatever is most likely to be relevant, have become an indispensable necessity.
+% Fortunately, the data drives patterns and the massive data out there allows one to extract a very large mass of patterns.
+%
+%
+% Yet, the massive challenge nowadays is not so much to capture patterns from \emph{massive} data but where the difficulty but also the bulk of the value lies is in how to capture patterns from \emph{small} data: a user has only visited one post on a typical social network (e.g., Reddit) and the system is already requested to issue a prediction.
+% 
+% The modern scenarios are doubly challenging: on the one hand, the information passed is minimal and, on the other hand, the information to use to try to make sense of the information passed is of gigantic proportions.
+% Hence, the recommendation problem becomes at its core a problem of attention: based on some information available, what to look at in a large mass and how much resources to spend on inspecting this subspace.
+% 
+% In that context, it appears evident that information is not so much abundant as one would first think, but is actually scarce: \emph{relevant information} is scarce, obscured by the irrelevant mass---needle in the haystack.
+%
+%
+% Faced with this information scarcity, it appears natural for the work in recommendation to try to \emph{augment} the information available by all means. Taking into account sequences of data point instead of simply isolated items, in the form of sequential embeddings~\cite{XXX} has been a recent important step out of many.
+% 
+% 
+% Yet, there is still a flurry of further structures in the data to draw more information from.
+% 
+% The \emph{temporal evolution} of the data as a whole is a highly valuable information. While patterns change, the system ought to adapt to this change, not only keeping up with the current patterns but even predicting upcoming patterns in the near to further future, allowing effective optimization ahead of time.
+% 
+% For example, as a single user's behavior evolves over times, due to changes of mood (short term) or changes of taste (long term), the model should not only identify this change but also integrate the change: forget the old patterns and learn better the new patterns.
+% The same can happen with a larger group of users, hence the data exhibits spatio-temporal patterns.
+% 
+% Yet, existing work in recommendations only capture the sequential patterns in a time-agnostic manner: A, B, C instead of A(t=0s), B(t=10s), C(t=50s), for example. A mechanism to bring together timestamp values and sequential patterns thus appears necessary.
+% 
+% % further reference:
+% % more formal explanation of what concept drift / online means:
+% % [1] Su’s Thesis (ongoing)
+% % Topic: ML-hybrid online (ML-driven) summarization
+% % Link to the Overleaf project with edit rights: https://www.overleaf.com/4769889431gstxytyygdcx
+% % Chapter Future Work; Section Capturing the time sequentially and via encoding - LSTM model
+% 
+% 
+% Another major aspect is that data does not exist alone but is always sitting in a \emph{highly heterogeneous} ecosystem: users issue shallow queries onto whatever peaks their interest, analysts run deeper queries to study whatever they would like to analyze, including users' patterns, administrators keep changing systems and want to maintain a safe degree of control, and, finally, new content is constantly fed. It is this highly unstructured ecosystem that makes up the data to work with.
+%
+% Such a large variety of events calls for differentiated and highly flexible mechanisms to model sequences in a hybrid environment. Rather than a simple interface with user sequences fed in without consideration for the types of the events, as is predominant in the literature~\cite{Bert4Rec_paper, XXX}, we need a solution that can smoothly integrates the different forms of events.
+%
+% To broaden the \emph{spectrum} of observations, there is a need to extend the mechanism with which we capture the sequences. Multiple forms of capture need to be combined.
+%
+% As an example, the queries from users need encode particularities about the queries, the queries from analysts need to be encoded as well but in a way wildly different, given that the analyst queries have a fundamentally different semantics: they testify of the interest of updates.
+% 
+% 
+% The real problem here is to deliver explainability, among other things through reliability. Only once things are explainable, understandable, can the humans truly be brought on board and their input find utmost use. And their collaboration is absolutely necessary for the system to really capture the semantics of the data in depth. And only with the semantics captured can real performance be unlocked.
+% 
+% 
+% Yet, existing work is by and far agnostic to the massive diversity of the relationships between objects, only considering connections, at times a few connections with different types per category~\cite{Bert4Rec, HGT} but not capturing relationships among categories (insufficient capture of diversity) and not making use of the combination of mechanisms but rather delivering only a single brittle and opaque black box without any control mechanism to understand from.
+% %
+% % wait. how to deliver capturing relationships among categories? Do we want it in the first place? Mhm, some ideas but it's more Markus's turf, at least that's the plan. Still to sell in bulk all at once for coherence. Will be internal work anyway.
+% 
+% 
+% 
+% % selling capture of arbitrary substructures on top but can be removed
+% % if we don't achieve. Let's see
+% Third, there is a need for a capture of substructures for even broader integration of data, actually the full expressivity from the data. But then, since the space considered becomes combinatorial, summarization is de mise. And for the summarization to happen, we need mechanisms to decide continuously which substructure should receive which representation and with how much resources attached.
+%
+% Over time, these decisions should be continuously revisited: spawning, merging, shrinking and extending substructures as necessary.
+%
+% Existing work is still far from such organic highly adaptive and highly dynamic structures, as the data is typically only represented with flat~\cite{HGT} (vs. hierarchical and organic), undifferentiated~\cite{Bert4Rec} (vs. summarized) structures.
+%
+%
+% \section{Problem Statement}
+% The lacks in the landscape of the state of the art could be summarized in that there is a need for a comprehensive time-aware (sequential and by value) solution that captures data patterns in a way allowing a flexible and tractable plurality of forms of capture and associated controls, and that the data representation ought to be organic and espouse the relevance patterns.
+% These gaps call for us to address in this work the following problem:
+%
+% % "adopt or support (a cause, belief, or way of life)."
+% % https://www.google.com/search?client=safari&rls=en&q=meaning+espouse&ie=UTF-8&oe=UTF-8
+%
+% \emph{How to capture in a fully temporally aware with differentiated control and capture data in an organic manner?}
+%
+%
+%
+%
+% \section{Solution}
+% 
+% We propose a comprehensive solution that captures the temporal evolution with a multi-pronged mechanism, integrates the user control in a way maximizing its use and organically summarize data at runtime.
+% %
+% We present our design in Figure~\ref{fig:system_design_universal_Bert}.
+%  
+% 
+% I drew a graph kind of out of habit but actually we're in set so maybe we should only see our data as a set of sequences. Mhm, makes no sense, if anything because classic connects. Let's go graph with user as list of meta attributes per edge (Opt. 1) / as more edges (Opt. 2) (I like option 1 better; lighter), then.
+% 
+% % draw fig. in Google Draw in drawing>Sets ( https://docs.google.com/drawings/d/1SBWWLdSUzSB5RltQSCVpC-GtDUUEuRhqwEwmDBLLwlY/edit?usp=sharing) and link to the fig. here in Overleaf. Yep, you can link to objects now and you only need to hit refresh here on Overleaf to pull updates on the other end. That's the principle, at least.
+% 
+% \begin{figure}[htbp!]
+% ...
+% \include_blah(images/diagrams/system_design_universal_Bert}
+% % check out handdrawn_system_design_universal_Bert_p*, pls.
+% \label{fig:system_design_universal_Bert}
+% \end{figure}
+% 
+% inspiration: https://docs.google.com/drawings/d/1SBWWLdSUzSB5RltQSCVpC-GtDUUEuRhqwEwmDBLLwlY/edit?usp=sharing = sets/classic
+% 
+% From top to bottom: queries are parsed in a streaming fashion and batched online before the updates are propagated to our graph structure. Online but at a lower time scale, the system infers on all ndoes using our combination of inference solution, controlled by the user and optimized on top by our hybridation hyperparameter optimization logic. The embeddings are then used to determine the summarization of our graph, which is our basis starting off with the next window.
+% 
+% 
+% 
+% \section{Contributions}
+% 
+% Our contributions are as follows
+% \begin{enumerate}
+%   \item \emph{Online Capture}. We deliver a system with an extensive array of mechanisms for capturing concept drift: we batch windows and keep learning but unsupervised and to a limited extent at test time (continual learning), in addition to adding encoded timestamps to our feature set (value-based temporal encoding) and recursively capturing the state of the system (sequential encoding).
+%
+% We believe that this extensively expressive approach to concept drift would inspire future work.
+%
+%
+%   \item \emph{Differentiated Combined Pipeline} We develop a framework accommodating the state of the art in classic sequence. We offer a principled mechanism to offer a continuum of guarantees against a differentiated degree of control. Our framework is highly flexible to allow natively the integration of new input, new state modeling mechanisms and new output (with associated control loops). We automate the combination via a meta-parameter optimization that only uses as much resources as allowed, i.e., explores only as much as the control allows it. The frame in which the parameters are optimized is set by the the user and, the more narrow that frame is, the smaller the exploration work needs to be---hence making up a natural trade-off human control to machine control.
+%
+% We believe that this extensively expressive approach to the combination of approaches would inspire future work.
+% % going to be using internal work on the classic side (@Nebi, @Tamir)
+%
+%
+%   \item \emph{Organic Summarization} We automatically manage  the resources dedicated to our structures, namely the size of their embeddings, as well as which structures we create, according to a novel ML-hybrid attention map. Where the attention is initiated from is driven by the workload: these are the regions with more queries.
+% We believe that this extensively expressive approach to organic summarization in the representation would inspire future work.
+%
+% % = map where workload will hit next = the classic work on query prediction (@Nebi, @Tamir) and ML (the system itself = in part internal work), on query prediction.
+% % = local attention map to drive resources, from classic on attention (@Nebi, @Tamir) and from ML (the system itself = in part internal work), on attention modeling.
+% % = the focused inference work, forgetting what's less relevant at runtime (@Sarp)
+%   
+% \end{enumerate}
+% 
+% 
+% \section{Early Results}
+% 
+% We have so far implemented a solution combining a classic mechanism with high degree of control.
+% 
+% \paragraph{Prototype System}
+% \begin{enumerate}
+% % 
+% \item \emph{Online.} The online aspects have not been introduced yet. % or are they? working on windows here? No clue. Correct and complete if yes. Would be nice.
+% %
+% \item  \emph{Combination.} We combine a classic mechanism with two state-of-the-art ML recommendation systems.
+% %
+% \item \emph{Summarization.} The summarization substructures being manually restricted to complete user-coherent sequences.
+% \end{enumerate}
+% 
+% 
+% \paragraph{Experimental Setup}
+% Across all our experiments, we take in data XYZ and let the mix of classic and ML1 vs. ML2 vary. We then present. Metrics considered are runtime and accuracy
+% % space usage would come next, btw.~\cite{MultiLENS} was an inspiration, btw.°2
+% 
+% 
+% \paragraph{Experiment 1: Performance Study}
+% 
+% In our first experiment, we take in data XYZ and let the mix of classic and ML1 vs. ML2 vary. We then present
+% 
+% We present our results in Figure~~\ref{fig:study_proto_universal_Bert_across_mixing_meta_para}.
+% 
+% \begin{figure}[htbp!]
+% ...
+% \label{fig:study_proto_universal_Bert_across_mixing_meta_para}
+% \end{figure}
+% 
+% We can see that the perf. varies as XXX and XXX. There appears to be a somewhat coherent pattern across datasetets, windows and setupts. We are hence reinforeced in our conviction that there is potential for meta optimization.
+% 
+% 
+% 
+% \paragraph{Experiment 2: Evaluation of the Hyper-parametrization}
+% 
+% Next, we activate our hyper-parameter optimization. We then evaluate our performance at runtime. The training happens over XXX epochs.
+% 
+% We present our results in Figure~\ref{fig:eval_proto_universal_Bert_opt_mixing_meta_para}.
+% 
+% % \begin{figure}[htbp!]
+% ...
+% \label{fig:eval_proto_universal_Bert_opt_mixing_meta_para}
+% \end{figure}
+% 
+% We can see that our hybrid system consistently outperforms the baselines XXX. This is very promising.
+% 
+% 
+% 
+% \paragraph{Next Steps}
+% Our next step will be to confirm our dominance over baselines in an online setup and with a degree organic summarization from conservative to more aggressive.
+% 
+% 
+% 
+

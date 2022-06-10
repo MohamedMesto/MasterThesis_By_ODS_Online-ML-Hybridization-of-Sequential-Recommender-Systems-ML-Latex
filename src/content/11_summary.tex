@@ -1,0 +1,19 @@
+\chapter{Conclusion}
+\section{Summary}
+In our work, we have designed an online, hybrid sequential recommender system that combines the state-of-the-art machine learning model BERT with a classic mathematical model based on Markov chains. BERT is a natural language model that uses a novel bidirectional encoder representation from transformers. Designed for natural language processing tasks, it can learn sequential patterns in text and is currently state-of-the-art in many benchmarks. By adapting the BERT model, we can encode sequential patterns of user-item interactions and exploit BERT to make recommendations. Our hybrid model can make significantly more accurate predictions compared to existing state-of-the-art models when measuring performance using standardized metrics.
+
+At first, we present the background of our work. We give an overview of the different types of recommender systems and how they differ from sequential recommender systems.
+
+Research and popular benchmarks show us that the best-performing systems frequently are a hybrid of many different models. The techniques to hybridize models are called ensemble methods. To better understand the importance of ensemble methods for hybrid systems, we explore the literature and give real-world examples where ensemble methods are used. We then present the most popular approaches including stacking and boosting.
+
+We follow up by describing the background to our two models in our hybrid system in detail. At first, we give a detailed overview of our Markov chain model and explain the mathematics with the help of an example. Then, we elaborate on the mechanics of BERT. The representation and embedding of input sequences, the self-attention and multi-attention approach for understanding sequences, and the pre-training tasks to train the model. Finally, we detail how we can use BERT to make recommendations. 
+
+In the chapter related work, we give an overview of some of the most popular sequential recommender models.
+
+After experimenting with different ensemble methods, we decided to design our hybrid system using the popular ensemble method called stacking. We explain our system requirements and design choices. Finally, we present how information flows through our system. 
+
+Next, we go into the experimental setup. We train our system with two different datasets, the MovieLens 1M dataset and the Amazon Beauty dataset. One dataset for long sequences and one for short sequences. For evaluation, we follow common procedures and standard performance metrics. We present our results by comparing our hybrid system against several state-of-the-art sequential recommender models. We find that our hybrid system can significantly outperform the existing models. Experiments about the tradeoff between performance, hidden dimensions, and training time follow. We address the reproducibility of our system an often criticized point in the literature and conclude our work by presenting potential future improvements to our system.
+
+
+\section{Outlook}
+Recommender systems, especially those that analyze the sequential behavior of users will continue to play an important role in the world. In recent years several breakthrough developments have led to much better recommendation models. Nevertheless, there is still room for improvement, especially for real-time recommendations. As the research field is expanding we anticipate more innovations in the future. We expect to see recommender systems being used in even more areas of life to help us make better decisions.

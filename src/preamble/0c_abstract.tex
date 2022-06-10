@@ -1,0 +1,15 @@
+
+\begin{abstract}
+% intro
+Recommender systems play a crucial role in the world. Extending existing systems, and developing new ones is necessary for more accurate predictions.
+
+% §1. Showing the gap
+Existing work in sequential recommendations is mostly time agnostic. A mechanism to capture temporal patterns that can encode timestamps is missing. Extensive pretraining is often required, and models can not adapt to data in real-time such as in an online environment. The meta optimization logic of hyperparameters frequently does not allocate resources efficiently, and there is a lack of administrator control.
+
+% §2. Describing the work
+In our work, we present an online, hybrid sequential recommender system that combines a state-of-the-art model based on BERT with a classic mathematical model based on Markov chains. We propose a hybridization architecture using regression that fuses the two models by aggregating and optimizing the outputs. The system combines models automatically via meta-parameter optimization and with associated controls. It is highly flexible and can natively integrate new input. We can extract temporal patterns from data by extending the BERT model to encode timestamps. In addition, we design a computation unit for our Markov chain model for efficient parallelization and develop an extensive array of mechanisms to capture concept drift. Our solution is ready for an online environment and supports training in real-time. If needed, the system adds or removes models dynamically. It monitors each model individually and resets or retrains a model as soon as the accuracy of the predictions declines.
+
+% §3. Presenting the results
+After conducting several experiments, the results show that our hybrid system can make significantly more accurate predictions than existing state-of-the-art models when measuring performance using standardized metrics while still updating the state (write) and delivering embeddings (read) both in real time. For the MovieLens 1M dataset, we get a 5.26\% improvement of the hitrate@1 and a 5.95\% improvement of the mean average precision. We achieve an increase of 5.85\% of the hitrate@1 and a 4.31\% increase of the mean average precision for the Amazon Beauty dataset. Our findings emphasize the importance of hybridization methods and their potential for performance improvements.
+
+\end{abstract}

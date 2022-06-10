@@ -1,0 +1,94 @@
+\chapter{Related Work}
+\label{chapter:related_work}
+
+We will now review existing work related to our work and highlight how they contributed to, inspired, or differed from this current effort.
+
+% D.
+% 
+% We're not grilling the related work on 
+% "
+% Before we can begin to design our system, we first need to define the requirements. Our goal is to capture data in a fully temporally aware manner and with organic controls. We specify the following requirements:
+
+% \begin{enumerate}
+%     \item \emph{Integration of Temporal Patterns} Our system should be able to encode timestamp information from the data.
+    
+%     \item \emph{Online Training} Our system should adapt to new data in real-time. 
+    
+%     \item \emph{Meta optimization} Our system should hybridize the different models with organic controls for optimal performance. 
+% \end{enumerate}
+% "
+% 
+% Integration of Temporal Patterns
+% Online Training
+% Meta optimization
+% 
+% 
+
+
+\section{Sequential Recommendations with Bidirectional Encoder Representations from Transformer}
+BERT4Rec is a model based on a Bidirectional Encoder Representation from Transformer (BERT)~\cite{sun2019bert4rec, devlin2018bert}. Traditional Recurrent Neural Networks (RNNs) encode sequences from left to right or right to left. This approach is insufficient because we only look at current and previous items in a sequence. On the other hand, a bidirectional encoder can look ahead into the "future" by jointly encoding from both left and right. If we think of the context of natural language processing, a word at the end of a sentence might change the meaning of words at the beginning of a sentence. First developed by Jacob Devlin in 2018, BERT can outperform previous models in many language processing tasks. By encoding the sequential interactions between users and items, BERT4Rec makes recommendations with very high accuracy. 
+
+In comparison, we will develop a more expressive model of BERT. We extend the BERT model to capture and encode more information from the data. Specifically, the temporal information that we can capture by embedding the timestamps of our datasets.
+
+Bert4Rec requires pretraining on the whole dataset before predictions can be made. For natural language processing tasks, this is usually not a major limitation: Grammar and vocabulary do not change very much over time. Yet, this condition does not hold for recommendations. A user's mood and taste change frequently and so do the user set and the item set. Therefore, we need to build an online solution of the BERT model that can continually adapt to new data.
+
+% D.
+% "We plan to extend the BERT model to capture and encode more information from the data."
+% "Therefore, we need to build an online solution of the BERT model that can continually adapt to new data."
+% Just present as if the work had been done. Present tense. Not presenting as plans.
+% ->
+% "We extend the BERT model to capture and encode more information from the data."
+% "Therefore, we build an online solution of the BERT model that can continually adapt to new data."
+
+% D.
+% vs. us?
+% What do we do? Where do we stand in that field with this work compared to the work mentioned?
+% 
+
+\section{Online Tracking and Encoding of Timestamps}
+In recurrent neural networks, information flows unidirectionally. Each neuron passes information to the next neuron and back to itself~\cite{geron2019hands}. Long short-term memory (LSTM) is a special type of recurrent neural network. It can keep a state or memory and learn about long-term patterns. Due to the state keeping and recurrence, LSTM's are ideal candidates for sequential encoding of patterns and for online environments as they allow to address concept drift and adapt to changes in the patterns efficiently~\cite{ergen2017efficient}. Recent work has developed a model for recommendations based on LSTM's~\cite{kang2018self}.
+% D.
+% "Self-Attentive Sequential Recommendation, the authors"
+% people don't usually name the paper or bring up authors. That's all too heavy. We just express the idea directly and add a citation at the end–the reader connects the dots and understand the statement made is backed by the paper.
+% otherwise naming the paper and saying "the authors said X" is just too heady syntax sugar.
+% 
+% ->
+% "Recent work has developed a model for recommendations based on LSTM's~\cite{kang2018self}."
+% lighter
+
+A major shortcoming of LSTM models is that they don't include temporal patterns. They treat events in the sequence as if they happen at regular and uniform times. However, this is not a good representation of reality. Recent developments include temporarily aware LSTM's so-called T-LSTM's~\cite{mou2019t}. The model can make significantly more accurate predictions when timestamp information is encoded. 
+
+We apply the same principles to our BERT model. The timestamps of our datasets are available. By encoding the timestamps into the BERT embeddings, we expect to see a similar performance improvement. 
+
+
+\section{Sequential Recommendations with Convolutional Neural Networks}
+Convolutional Neural Networks (CNNs) were inspired by the cells in the visual pathways of the brain~\cite{hubel1968receptive}. They have evolved to perform well in various tasks such as pattern recognition or image classification. The Convolutional Sequence Embedding Recommendation Model (Caser) aims to capitalize on the strengths of CNNs~\cite{tang2018personalized}. By embedding a sequence of interactions between a user and items into an image in the time and latent spaces, we can use convolutional filters to learn sequential patterns and user preferences as local features of the images. Based on the image embeddings we can then make recommendations. In the literature, Caser consistently has a high accuracy score for many public data sets.
+
+Existing work that uses convolution over graphs is not expressive enough because they don't encode entire paths of sequences~\cite{hamilton2017inductive,hu2020heterogeneous}. Similarly, most models are not dynamic enough and don't integrate temporal patterns efficiently. Although recent work has evolved to be more temporally aware, a bundled solution that captures both temporal patterns and can make efficient recommendations is needed~\cite{fan2021heterogeneous}.
+
+
+\section{Sequential Recommendations with Markov-chains}
+A more classical, nevertheless powerful model is Factorizing Personalized Markov Chains (FPMC)~\cite{rendlefactorizing}. A Markov chain is a stochastic method that estimates the transition probabilities of a stochastic process going from one state to another state~\cite{kemeny1976markov}. In the case of recommendations, we can use sequential data and exploit Markov chains to predict the next item a user interacts with based on the last item. We can then form a matrix with the transition probabilities for all the users. To get more accurate predictions, FPMC combines Markov chains with Matrix Factorization. Matrix factorization is a mathematical method that can be categorized as a collaborative recommender system because it does not consider the sequential order of user-item interactions. Instead, matrix factorization represents both items and users in a matrix product of lower-dimensional space~\cite{koren2009matrix}. This representation allows us to analyze the similarities in user-item interactions between different users. With the combination of Markov chains and matrix factorization, FPMC can compete with more modern machine learning models such as BERT or Caser.
+
+Our classic model and Markov chain approach will be a custom implementation of the FPMC model that allows for more control and flexibility. A major downside of the FPMC model is that all parameters need to be hardcoded. Consequently, we extend the model by adding hyperparameter optimization. Additionally, we design a parallelization computation unit that allows efficient online training in real-time.
+
+
+\section{Model-based Approach}
+Several machine learning projects exist that employ model-based mathematical algorithms~\cite{jin2019latent,yoon2018fast,yoon2019fast}. They all use a form of matrix factorization, a technique that we plan to use later to improve our Markov chain model. Existing models are still too simple, however. Although they offer guarantees, their performance comes from a high amount of engineering. This approach is not suitable for an online solution. Existing work that focuses on hybridizing model-based algorithms with more modern machine learning models suffers from similar problems~\cite{shlezinger2020model}. Usually, these systems are optimized and only work for very specific problems. Often they can only work with a limited amount of data. As soon as the data changes, they can't adapt, and their performance suffers significantly.
+
+Since we plan to use our project in a highly dynamic environment, a more adaptive system design is needed. The data we work on comes from different sources, and the content varies. We build our system to be adaptive for an online environment. It It should capture diverse forms of data and still make accurate predictions.
+
+
+\section{Meta Optimization and Hybridization}
+Finding ideal hyperparameters for a model is a difficult task. With meta optimization, we can automate the process. Since we want to make our system flexible and extend it in the future, we need to design a meta-learning algorithm. Existing work on meta optimization focuses on building model agnostic algorithms that can work for diverse models and tasks~\cite{finn2017model}. However, the current state-of-the-art is complicated, hard to piece together, and not flexible enough. Modern machine learning models have a high computational demand which makes the optimization of hyperparameters extremely costly\cite{falkner2018bohb}. Similarly, they often don't take into account efficient resource allocation. Although automation is paramount, we don't always want to eliminate all administrator interaction with the system. Instead, we want a system with a high degree of automation but is flexible enough to allow control by the administrator. Unfortunately, there is a lack of manual control in existing systems~\cite{feurer2019hyperparameter}.
+
+In our work, we design a meta optimization logic. We optimize it for efficient resource allocation by testing under various workloads. Additionally, we plan to develop a panel for administrator controls to offer more flexibility.
+
+We can integrate our work into existing frameworks in some actor-critic or other agent architecture because we are just one form of agent~\cite{lee2021sunrise}. To favor simplicity, we keep the processing to one agent. We restrict the selection for our ensemble only to the most promising mechanism (BERT) and the most controllable mechanism (Markov chains) to make the hybridization give way to a clear simple trade-off of control vs. adaptivity---a trade-off easy to optimize parameters for, be it with a machine or for a human.
+
+Meta optimization and hybridization are closely related tasks. The Netflix Prize was a machine learning competition for recommender systems first held by Netflix in 2007~\cite{Netflixprize}. The goal was to build a system that would predict the next movie a user rates, based on the movie ratings of all users. A \$1 million prize was on the line for the winning team that could beat Netflix's existing recommender system. Korbell, the winning team, scored an 8.43\% improvement over the existing Netflix system. Their final system is an ensemble of 107 algorithms which they have reportedly spent over 2000 hours building. The majority of popular papers of recommender systems use not one algorithm but an ensemble of several algorithms to get the most accurate results~\cite{portugal2018use}. 
+
+As more models are combined, and more information is available, the complexity and computational overhead increase. In the competition, time did not play a role. However, since Netflix operates in a highly dynamic online environment, they need to balance accuracy and time. Therefore they only partially adapted their system after the competition since the winning solution was not fast enough. More efficient mechanisms to optimize the hybridization process in real-time are needed. In our work, we focus on exactly that. We plan to hybridize models for better performance but without significant overhead. 
+
+% D.
+% maybe attack on complexity bringing down reusability?
